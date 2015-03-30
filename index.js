@@ -39,7 +39,6 @@ Bot.prototype.serve = function(address) {
         'group': self.group
       }));
     } else if (request.url.indexOf(self.tail + '/incoming') > -1 && request.method == 'POST') {
-      console.log("tail is " + self.tail);
       var form = new formidable.IncomingForm();
       var messageFields = {};
       form.parse(request, function(err, fields, files) {
