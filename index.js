@@ -5,6 +5,7 @@ const events = require('events');
 const util = require('util');
 const http = require('http');
 const formidable = require('formidable');
+const httpProxy = require('http-proxy');
 
 // config { token:groupme token,
 //          group:the room to connect to,
@@ -29,7 +30,9 @@ util.inherits(Bot, events.EventEmitter);
 // arg: address to serve on
 Bot.prototype.serve = function(address) {
   var self = this;
+  var proxy = httpProxy.createProxyServer({});
   var server = http.createServer(function(request, response) {
+    req.headers.host = this.url;
     if (request.url == '/' && request.method == 'GET') {
       response.writeHead(200, {
         "Content-Type": "application/json"
@@ -85,7 +88,9 @@ Bot.prototype.serve = function(address) {
       });
       response.end("NOT FOUND");
     }
-
+    proxy.web(req, res, {
+      target: this.url
+    });
   }.bind(this));
   server.listen(address);
 };
