@@ -31,6 +31,7 @@ util.inherits(Bot, events.EventEmitter);
 Bot.prototype.serve = function(address) {
   var self = this;
   var serverData = {
+    port: address,
     token: this.token,
     group: this.group,
     name: this.name,
