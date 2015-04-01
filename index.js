@@ -3,9 +3,9 @@ const request = require('request');
 const _ = require('underscore');
 const events = require('events');
 const util = require('util');
-const http = require('http');
+var server = require('bot-server')
+
 const formidable = require('formidable');
-const httpProxy = require('http-proxy');
 
 // config { token:groupme token,
 //          group:the room to connect to,
@@ -30,70 +30,22 @@ util.inherits(Bot, events.EventEmitter);
 // arg: address to serve on
 Bot.prototype.serve = function(address) {
   var self = this;
-  var proxy = httpProxy.createProxyServer({});
-  var server = http.createServer(function(request, response) {
-    req.headers.host = this.url;
-    if (request.url == '/' && request.method == 'GET') {
-      response.writeHead(200, {
-        "Content-Type": "application/json"
-      });
-      response.end(JSON.stringify({
-        'name': self.name,
-        'group': self.group
-      }));
-    } else if (request.url.indexOf(self.tail + '/incoming') > -1 && request.method == 'POST') {
-      var form = new formidable.IncomingForm();
-      var messageFields = {};
-      form.parse(request, function(err, fields, files) {
-        if (err) console.error("bad incoming data " + err);
-      });
-
-      form.on('field', function(name, value) {
-        messageFields[name] = value;
-      });
-
-      form.on('end', function() {
-        response.writeHead(200, {
-          "Content-Type": "text/plain"
-        });
-        response.end("THANKS");
-        if (typeof messageFields.payload !== 'undefined') {
-          self.emit('botImage', self, {
-            url: messageFields.payload.url,
-            picture_url: messageFields.payload.picture_url,
-            payload: messageFields.payload
-          });
-        } else {
-          self.emit('botMessage', self, {
-            attachments: messageFields.attachments,
-            avatar_url: messageFields.avatar_url,
-            created_at: messageFields.created_at,
-            group_id: messageFields.group_id,
-            id: messageFields.id,
-            name: messageFields.name,
-            sender_id: messageFields.sender_id,
-            sender_type: messageFields.sender_type,
-            source_guid: messageFields.source_guid,
-            system: messageFields.system,
-            text: messageFields.text,
-            user_id: messageFields.user_id,
-            payload: messageFields.payload
-          });
-        }
-      });
-
-    } else {
-      response.writeHead(404, {
-        "Content-Type": "text/plain"
-      });
-      response.end("NOT FOUND");
-    }
-    proxy.web(req, res, {
-      target: this.url
-    });
-  }.bind(this));
-  server.listen(address);
+  var serverData = {
+    token: this.token,
+    group: this.group,
+    name: this.name,
+    url: this.url,
+    tail: this.tail
+  }
+  server(serverData);
 };
+
+server.on('serverMessage', function(s) {
+  if (s.botName == self.name) {
+    console.log('got message from' + s.botName);
+    self.emit('botMessage', self, s);
+  }
+});
 
 // make the bot say something
 Bot.prototype.message = function(_message) {
