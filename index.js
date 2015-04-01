@@ -37,7 +37,7 @@ Bot.prototype.serve = function(address) {
     url: this.url,
     tail: this.tail
   }
-  var myServer myServer = server(serverData);
+  var myServer = server(serverData);
   myServer.on('serverMessage', function(s) {
     if (s.botName == self.name) {
       console.log('got message from' + s.botName);
