@@ -8,6 +8,9 @@ function BotServer(config) {
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
 	}
+	if (this.locs == undefined) {
+		this.locs = [];
+	}
 	this.locs[this.locs.length] = this.tail;
 	console.log("registering the server");
 	this.serve(this.port);
