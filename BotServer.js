@@ -3,7 +3,7 @@ var http = require('http'),
 	util = require('util');
 
 function BotServer(config) {
-	if (!(this instanceof Server)) return new Server(config);
+	if (!(this instanceof BotServer)) return new BotServer(config);
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
 	}
@@ -13,12 +13,12 @@ function BotServer(config) {
 };
 
 
-util.inherits(Server, events.EventEmitter);
+util.inherits(BotServer, events.EventEmitter);
 
 
-Server.prototype.serve = function(address) {
+BotServer.prototype.serve = function(address) {
 	var self = this;
-	var server = http.createServer(function(request, response) {
+	var botServer = http.createServer(function(request, response) {
 		req.headers.host = this.url;
 		if (request.url == '/' && request.method == 'GET') {
 			response.writeHead(200, {
@@ -68,7 +68,7 @@ Server.prototype.serve = function(address) {
 			response.end("NOT FOUND");
 		}
 	}.bind(this));
-	server.listen(address);
+	botServer.listen(address);
 }
 
 function acceptableLoc(loc) {
