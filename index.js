@@ -1,10 +1,10 @@
-const async = require('async');
-const request = require('request');
-const _ = require('underscore');
-const events = require('events');
-const util = require('util');
-const server = require('./BotServer.js')
-const formidable = require('formidable');
+var async = require('async'),
+  request = require('request'),
+  _ = require('underscore'),
+  events = require('events'),
+  util = require('util'),
+  server = require('./BotServer.js'),
+  formidable = require('formidable');
 
 // config { token:groupme token,
 //          group:the room to connect to,
