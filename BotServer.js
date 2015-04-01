@@ -73,7 +73,7 @@ Server.prototype.serve = function(address) {
 
 function acceptableLoc(loc) {
 	for (var i = 0; i < this.locs.length; i++) {
-		this.locs[i].indexOf(loc) > -1 {
+		if (this.locs[i].indexOf(loc) > -1) {
 			return true;
 		}
 	};
