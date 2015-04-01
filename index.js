@@ -27,6 +27,7 @@ util.inherits(Bot, events.EventEmitter);
 
 // start the web server
 // arg: address to serve on
+var myServer;
 Bot.prototype.serve = function(address) {
   var self = this;
   var serverData = {
@@ -36,10 +37,10 @@ Bot.prototype.serve = function(address) {
     url: this.url,
     tail: this.tail
   }
-  server(serverData);
+  myServer = server(serverData);
 };
 
-server.on('serverMessage', function(s) {
+myServer.on('serverMessage', function(s) {
   if (s.botName == self.name) {
     console.log('got message from' + s.botName);
     self.emit('botMessage', self, s);
