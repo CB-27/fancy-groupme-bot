@@ -3,7 +3,7 @@ const request = require('request');
 const _ = require('underscore');
 const events = require('events');
 const util = require('util');
-const server = require('BotServer')
+const server = require('./BotServer.js')
 const formidable = require('formidable');
 
 // config { token:groupme token,
