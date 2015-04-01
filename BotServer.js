@@ -72,6 +72,9 @@ BotServer.prototype.serve = function(address) {
 			response.end("NOT FOUND");
 		}
 	}.bind(this));
+	botServer.on('error', function(e) {
+		console.log('problem with request: ' + e.message);
+	});
 	botServer.listen(address);
 }
 
