@@ -2,7 +2,7 @@ var http = require('http'),
 	request = require('request'),
 	util = require('util');
 
-function Server(config) {
+function BotServer(config) {
 	if (!(this instanceof Server)) return new Server(config);
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
@@ -80,4 +80,4 @@ function acceptableLoc(loc) {
 	return false;
 }
 
-module.exports = Server;
+module.exports = BotServer;
