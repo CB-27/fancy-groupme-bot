@@ -55,6 +55,7 @@ BotServer.prototype.serve = function(address) {
 					"Content-Type": "text/plain"
 				});
 				response.end("THANKS");
+				console.log("BotServer sent message");
 				self.emit('serverMessage', self, {
 					botName: self.name,
 					attachments: messageFields.attachments,

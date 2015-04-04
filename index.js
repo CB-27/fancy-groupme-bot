@@ -34,6 +34,7 @@ Bot.prototype.serve = function(myServer) {
   console.log("attempting to add "+ this.tail);
   myServer.addPath(this.tail);
   myServer.on('serverMessage', function(s) {
+  	console.log("Bot received message");
     if (s.botName == self.name) {
       console.log('got message from' + s.botName);
       self.emit('botMessage', self, s);
