@@ -89,8 +89,9 @@ BotServer.prototype.serve = function(address) {
 
 
 function acceptableLoc(loc) {
-	console.log("Checking if "+loc+"is ok");
+	console.log("Checking if "+ loc +" is ok");
 	for (var i = 0; i < locs.length; i++) {
+		console.log("Checking "+locs[i]);
 		if (locs[i].indexOf(loc) > -1) {
 			return true;
 		}
