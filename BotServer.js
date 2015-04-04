@@ -17,10 +17,12 @@ function BotServer(config) {
 util.inherits(BotServer, events.EventEmitter);
 
 BotServer.prototype.addPath = function(path) {
-	if (this.locs == undefined) {
-		this.locs = [];
+	if (typeof(this.locs) != "undefined") {
+		this.locs[this.locs.length] = path;	
 	}
-	this.locs[this.locs.length] = path;
+	else{
+		this.locs = [path];
+	}
 };
 
 
