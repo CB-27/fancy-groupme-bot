@@ -92,7 +92,7 @@ function acceptableLoc(loc) {
 	console.log("Checking if "+ loc +" is ok");
 	for (var i = 0; i < locs.length; i++) {
 		console.log("Checking "+locs[i]);
-		if (locs[i].indexOf(loc) > -1) {
+		if (loc.indexOf(locs[i]) > -1) {
 			console.log("Go for it!");
 			return true;
 		}
