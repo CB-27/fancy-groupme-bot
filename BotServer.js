@@ -57,7 +57,7 @@ BotServer.prototype.serve = function(address) {
 				});
 				response.end("THANKS");
 				console.log("BotServer sent message");
-				self.emit('serverMessage', self, {
+				self.emit('serverMessage', {
 					botName: self.name,
 					attachments: messageFields.attachments,
 					avatar_url: messageFields.avatar_url,
