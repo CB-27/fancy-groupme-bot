@@ -10,7 +10,9 @@ var async = require('async'),
 //          group:the room to connect to,
 //          name: the bot name,
 //          url: optional callback,
-//          avatar_url: optional avatar image
+//      	tail: url tail,
+//          avatar_url: optional avatar image 
+	
 function Bot(config) {
   if (!(this instanceof Bot)) return new Bot(config);
   for (var key in config)
@@ -25,20 +27,11 @@ function Bot(config) {
 
 util.inherits(Bot, events.EventEmitter);
 
-// start the web server
-// arg: address to serve on
+//given a server, listen for messages
 
-Bot.prototype.serve = function(address) {
+Bot.prototype.serve = function(myServer) {
   var self = this;
-  var serverData = {
-    port: address,
-    token: this.token,
-    group: this.group,
-    name: this.name,
-    url: this.url,
-    tail: this.tail
-  }
-  var myServer = server(serverData);
+  myServer.addPath(this.tail)
   myServer.on('serverMessage', function(s) {
     if (s.botName == self.name) {
       console.log('got message from' + s.botName);
@@ -161,4 +154,7 @@ Bot.prototype.registerBot = function() {
   }.bind(this));
 };
 
-module.exports = Bot;
+module.exports = {
+	Bot,
+	server
+};

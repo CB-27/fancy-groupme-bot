@@ -8,16 +8,20 @@ function BotServer(config) {
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
 	}
-	if (this.locs == undefined) {
-		this.locs = [];
-	}
-	this.locs[this.locs.length] = this.tail;
+	
 	console.log("registering the server");
 	this.serve(this.port);
 };
 
 
 util.inherits(BotServer, events.EventEmitter);
+
+BotServer.prototype.addPath = function(path) {
+	if (this.locs == undefined) {
+		this.locs = [];
+	}
+	this.locs[this.locs.length] = path;
+};
 
 
 BotServer.prototype.serve = function(address) {
@@ -77,6 +81,8 @@ BotServer.prototype.serve = function(address) {
 	});
 	botServer.listen(address);
 }
+
+
 
 function acceptableLoc(loc) {
 	for (var i = 0; i < this.locs.length; i++) {
