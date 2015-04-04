@@ -19,7 +19,7 @@ var locs = [];
 BotServer.prototype.addPath = function(path) {
 	console.log("Added "+path);
 	if (typeof(locs) != "undefined") {
-		locs[this.locs.length] = path;	
+		locs[locs.length] = path;	
 	}
 	else{
 		locs = [path];
