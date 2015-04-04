@@ -1,7 +1,8 @@
 var http = require('http'),
 	request = require('request'),
 	util = require('util'),
-	events = require('events');
+	events = require('events'),
+	formidable = require('formidable');
 
 function BotServer(config) {
 	if (!(this instanceof BotServer)) return new BotServer(config);
