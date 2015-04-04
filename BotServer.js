@@ -27,7 +27,7 @@ BotServer.prototype.addPath = function(path) {
 BotServer.prototype.serve = function(address) {
 	var self = this;
 	var botServer = http.createServer(function(request, response) {
-		req.headers.host = this.url;
+		request.headers.host = this.url;
 		if (request.url == '/' && request.method == 'GET') {
 			response.writeHead(200, {
 				"Content-Type": "application/json"
