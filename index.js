@@ -35,9 +35,8 @@ Bot.prototype.serve = function(myServer) {
   myServer.addPath(this.tail);
   myServer.on('serverMessage', function(s) {
   	console.log("Bot received message");
-  	console.log("Message to "+ self.name + ": " + JSON.stringify(s));
-      console.log('got message from' + s.name);
-      self.emit('botMessage', self, s);
+    console.log('got message from ' + s.name);
+    self.emit('botMessage', self, s);
   });
 };
 
