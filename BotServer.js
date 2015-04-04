@@ -88,8 +88,8 @@ BotServer.prototype.serve = function(address) {
 
 
 function acceptableLoc(loc) {
-	for (var i = 0; i < this.locs.length; i++) {
-		if (this.locs[i].indexOf(loc) > -1) {
+	for (var i = 0; i < locs.length; i++) {
+		if (locs[i].indexOf(loc) > -1) {
 			return true;
 		}
 	};
