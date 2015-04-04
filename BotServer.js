@@ -93,9 +93,11 @@ function acceptableLoc(loc) {
 	for (var i = 0; i < locs.length; i++) {
 		console.log("Checking "+locs[i]);
 		if (locs[i].indexOf(loc) > -1) {
+			console.log("Go for it!");
 			return true;
 		}
-	};
+	}
+	console.log("nah");
 	return false;
 }
 
