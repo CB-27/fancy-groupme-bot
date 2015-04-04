@@ -155,6 +155,6 @@ Bot.prototype.registerBot = function() {
 };
 
 module.exports = {
-	Bot,
-	server
+	Bot: Bot,
+	Server: server
 };
