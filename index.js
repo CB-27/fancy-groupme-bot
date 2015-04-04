@@ -31,7 +31,8 @@ util.inherits(Bot, events.EventEmitter);
 
 Bot.prototype.serve = function(myServer) {
   var self = this;
-  myServer.addPath(this.tail)
+  console.log("attempting to add "+ this.tail);
+  myServer.addPath(this.tail);
   myServer.on('serverMessage', function(s) {
     if (s.botName == self.name) {
       console.log('got message from' + s.botName);

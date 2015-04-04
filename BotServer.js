@@ -17,6 +17,7 @@ function BotServer(config) {
 util.inherits(BotServer, events.EventEmitter);
 
 BotServer.prototype.addPath = function(path) {
+	console.log("Added "+path);
 	if (typeof(this.locs) != "undefined") {
 		this.locs[this.locs.length] = path;	
 	}
