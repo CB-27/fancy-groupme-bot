@@ -12,7 +12,7 @@ function BotServer(config) {
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
 	}
-	if (this.hasOwnProperty(privateKey) && this.hasOwnProperty(certificate)) {
+	if (this[privateKey] != null && this[certificate] != null) {
 		options = {
 			key: fs.readFileSync(this.privateKey),
 			cert: fs.readFileSync(this.certificate)
