@@ -22,7 +22,7 @@ function BotServer(config) {
 	if (options !== "") {
 		this.serve(this.port, options);
 	} else {
-		this.serve(address);
+		this.serve(this.port);
 	}
 }
 
