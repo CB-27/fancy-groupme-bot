@@ -17,7 +17,7 @@ function BotServer(config) {
 			key: fs.readFileSync(this.privateKey),
 			cert: fs.readFileSync(this.certificate)
 		};
-		this.serve(this.port, options);
+		this.serveSecure(this.port, options);
 	} else {
 		this.serve(this.port);
 	}
@@ -95,7 +95,7 @@ BotServer.prototype.serve = function(address) {
 	botServer.listen(address);
 };
 
-BotServer.prototype.serve = function(address, options) {
+BotServer.prototype.serveSecure = function(address, options) {
 	var self = this;
 	var botServer = tls.createServer(function(request, response) {
 		request.headers.host = this.url;
