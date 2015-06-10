@@ -8,18 +8,15 @@ var http = require('http'),
 
 function BotServer(config) {
 	if (!(this instanceof BotServer)) return new BotServer(config);
-	var options = "";
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
 	}
+	console.log("registering the server");
 	if (config.hasOwnProperty("privateKey") && config.hasOwnProperty("certificate")) {
-		options = {
+		var options = {
 			key: fs.readFileSync(this.privateKey),
 			cert: fs.readFileSync(this.certificate)
 		};
-	}
-	console.log("registering the server");
-	if (options !== "") {
 		this.serve(this.port, options);
 	} else {
 		this.serve(this.port);
