@@ -12,14 +12,14 @@ function BotServer(config) {
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
 	}
-	if (this[privateKey] != null && this[certificate] != null) {
+	if (this["privateKey"] !== null && this["certificate"] !== null) {
 		options = {
 			key: fs.readFileSync(this.privateKey),
 			cert: fs.readFileSync(this.certificate)
 		};
 	}
 	console.log("registering the server");
-	if (options != "") {
+	if (options !== "") {
 		this.serve(this.port, options);
 	} else {
 		this.serve(address);
