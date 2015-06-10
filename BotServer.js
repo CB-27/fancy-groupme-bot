@@ -3,6 +3,7 @@ var http = require('http'),
 	util = require('util'),
 	events = require('events'),
 	tls = require('tls'),
+	fs = require('fs'),
 	formidable = require('formidable');
 
 function BotServer(config) {
