@@ -10,20 +10,18 @@ function BotServer(config) {
 	var options = "";
 	for (var key in config) {
 		if (config.hasOwnProperty(key)) this[key] = config[key];
-		if (config.hasOwnProperty(privateKey)) {
-			options = {
-				key: fs.readFileSync(config[privateKey]),
-				cert: fs.readFileSync(config[certificate])
-			};
-		}
 	}
+	options = {
+		key: fs.readFileSync(this.privateKey),
+		cert: fs.readFileSync(this.certificate)
+	};
 	console.log("registering the server");
-	if (options != "") {
+	if (options !== "") {
 		this.serve(this.port, options);
 	} else {
 		this.serve(address);
 	}
-};
+}
 
 
 util.inherits(BotServer, events.EventEmitter);
@@ -95,11 +93,11 @@ BotServer.prototype.serve = function(address) {
 		console.log('problem with request: ' + e.message);
 	});
 	botServer.listen(address);
-}
+};
 
 BotServer.prototype.serve = function(address, options) {
 	var self = this;
-	var botServer = tls.createServer(options, function(request, response) {
+	var botServer = tls.createServer(function(request, response) {
 		request.headers.host = this.url;
 		if (request.url == '/' && request.method == 'GET') {
 			response.writeHead(200, {
@@ -154,7 +152,7 @@ BotServer.prototype.serve = function(address, options) {
 		console.log('problem with request: ' + e.message);
 	});
 	botServer.listen(address);
-}
+};
 
 
 
